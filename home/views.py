@@ -5,6 +5,11 @@ from django.shortcuts import redirect
 # Create your views here.
 
 
+def homePage(request):
+
+    return render(request, 'homepage/index.html')
+
+
 def signinPage(request):
 
     if request.method == 'POST':
@@ -16,6 +21,6 @@ def signinPage(request):
         if user is not None:
             login(request, user)
             print('user signed in')
-            # return redirect('home')
+            return redirect('home')
     context = {}
     return render(request, 'sign-in/index.html')

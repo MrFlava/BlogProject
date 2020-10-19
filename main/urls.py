@@ -21,5 +21,5 @@ from main import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('sign_in/', include("sign-in.urls")),
+    path('', include("home.urls")),
 ]
