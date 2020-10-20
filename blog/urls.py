@@ -1,5 +1,8 @@
-
-from django.contrib import admin
 from django.urls import path
 
-urlpatterns = []
+from . import views
+
+urlpatterns = [
+    path('', views.myblogPage, name='my_blog'),
+    path('create_post', views.createpostPage, name='create_post'),
+]
