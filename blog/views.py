@@ -7,7 +7,6 @@ from .models import Post
 
 
 def myblogPage(request):
-
     blog = Blog.objects.get(pk=request.user)
     return render(request=request, template_name="my_blog/index.html", context={'blog': blog})
 

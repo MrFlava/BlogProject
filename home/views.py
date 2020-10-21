@@ -7,12 +7,7 @@ from blog.models import Blog, Post
 
 
 def homePage(request):
-    posts = Post.objects.all()
-    context = {
-        'posts': posts
-    }
-
-    return render(request, 'homepage/index.html', context)
+    return render(request, 'homepage/index.html')
 
 
 def signinPage(request):
