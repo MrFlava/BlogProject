@@ -22,6 +22,13 @@
                 <div class="d-flex justify-content-left">
                     <h5>{{ s.blog.subscribers }} subscribers {{ s.blog.subscribed }} subscribed</h5>
                 </div>
+                <div class="d-flex justify-content-left">
+                    <a class="btn text-white btn-primary btn-lg mr-2"  role="button" onClick="document.getElementById('unsubscribe_button').submit()">Unsubscribe</a>
+                    <form  id="unsubscribe_button" method="GET" action="unsubscribe/{{s.blog.pk}}/{{s.pk}}">
+                        {% csrf_token %}
+                        <input type="hidden">
+                    </form>
+                </div>
                 {% endfor %}<br>
 			</div>
             <div class="user_card">
@@ -33,7 +40,11 @@
                     <h3>{{ r.user }}</h3>
                 </div>
                 <div class="d-flex justify-content-left">
-                    <a href="subscribe/" class="btn btn-primary btn-lg mr-2" role="button" aria-disabled="true">Subscribe</a>
+                    <a class="btn text-white btn-primary btn-lg mr-2"  role="button" onClick="document.getElementById('subscribe_button').submit()">Subscribe</a>
+                    <form  id="subscribe_button" method="POST" action="subscribe/{{r.pk}}">
+                        {% csrf_token %}
+                        <input type="hidden">
+                    </form>
                 </div>
                 {% endfor %}<br>
 			</div>
