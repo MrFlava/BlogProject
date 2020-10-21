@@ -66,9 +66,15 @@
                 <div class="d-flex justify-content-left">
                     <h6>Created at {{ p.published|date:"M d, Y" }}</h6>
                 </div>
+                {% if post != p and is_read == True %}
                 <div class="d-flex justify-content-left">
-                    <a href="read-post/" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Read this post</a>
+                    <a class="btn btn-primary btn-lg" role="button" aria-disabled="true" onClick="document.getElementById('add_read_status').submit()">Read this post</a>
+                    <form  id="add_read_status" method="POST" action="read_post/{{p.pk}}">
+                         {% csrf_token %}
+                        <input type="hidden">
+                    </form>
                 </div>
+                {% endif %}
                 {% endfor %}<br>
             </div>
         </div>
