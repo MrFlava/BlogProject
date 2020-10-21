@@ -12,10 +12,11 @@ def myblogPage(request):
 
 
 def createpostPage(request):
-
     error = ''
+
     if request.method == 'POST':
         form = PostForm(request.POST)
+
         if form.is_valid():
             blog = Blog.objects.get(pk=request.user)
             post = Post()

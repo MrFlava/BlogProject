@@ -7,14 +7,15 @@ from blog.models import Blog, Post, ReadPost
 
 
 def newsfeedPage(request):
-
     recommendations = []
     posts = []
     user_and_subscriptions = [request.user]
     subscriptions = Subscriber.objects.filter(user=request.user)
+
     for s in subscriptions:
         user_and_subscriptions.append(s.blog.user)
         posts += Post.objects.filter(blog=s.blog)
+
     if len(user_and_subscriptions) == 1:
         recommendations = Blog.objects.exclude(user__in=user_and_subscriptions)
     else:
