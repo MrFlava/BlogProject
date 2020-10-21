@@ -14,9 +14,10 @@ def newsfeedPage(request):
     subscriptions = Subscriber.objects.filter(user=request.user)
     for s in subscriptions:
         user_and_subscriptions.append(s.blog.user)
-        recommendations += Blog.objects.exclude(user__in=user_and_subscriptions)
         posts += Post.objects.filter(blog=s.blog)
     if len(user_and_subscriptions) == 1:
+        recommendations = Blog.objects.exclude(user__in=user_and_subscriptions)
+    else:
         recommendations += Blog.objects.exclude(user__in=user_and_subscriptions)
 
     context = {
@@ -40,7 +41,7 @@ def subscribe(request, blog_id):
 
         new_subscriber.save()
 
-        return render(request, 'blogs/index.html')
+        return redirect('newsfeed')
 
 
 def unsubscribe(request, blog_id, subscription_id):
@@ -55,7 +56,7 @@ def unsubscribe(request, blog_id, subscription_id):
 
         blog.save()
 
-        return render(request, 'blogs/index.html')
+        return redirect('newsfeed')
 
 
 def read_post(request, post_id):
@@ -70,4 +71,4 @@ def read_post(request, post_id):
             "is_read": True
         }
 
-        return render(request, 'blogs/index.html', context)
+        return render(request=request, template_name='blogs/index.html', context=context)
